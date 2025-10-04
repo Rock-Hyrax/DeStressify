@@ -1,19 +1,25 @@
+import { NavLink } from 'react-router';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import GridViewIcon from '@mui/icons-material/GridView';
 import BarChartIcon from '@mui/icons-material/BarChart';
+import logo from "../assets/logo/logo.png";
 
 import "./Menu.css";
-import { NavLink } from 'react-router';
 
 const Menu= ()=> {
   return (
     <div className="menu_container">
-      <div>logo</div>
+      <NavLink className="logo_link" to="/">
+        <section className="logo_section">
+          <img className="" src={ logo } alt="Logo" />
+          <p className="">DeStressify</p>
+        </section>
+      </NavLink>
       <nav>
         <ul>
           <NavLink to="/stress-level"><ShowChartIcon />Stress level</NavLink>
           <NavLink to="/applications"><GridViewIcon />Applications</NavLink>
-          <NavLink to="/analytics"><BarChartIcon />Analitycs</NavLink>
+          <NavLink to="/analytics"><BarChartIcon />Analytics</NavLink>
         </ul>
       </nav>
     </div>

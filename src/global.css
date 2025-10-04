@@ -5,7 +5,12 @@
 
 :root {
   --font-family: Jura;
-  --font-color: #eeeeee;
+  --font-color: #EEEEEE;
   --bg-color: #263238;
-  --menu-bg-color: #212121
+  --menu-bg-color: #212121;
+
+  --color-accent-green: #8BC34A;
+  --color-accent-blue: #00BCD4;
+
+  --widget-border-color-blue: rgba(	0, 188, 212, .2 );
 }
