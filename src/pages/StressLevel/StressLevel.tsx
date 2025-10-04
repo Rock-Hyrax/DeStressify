@@ -1,18 +1,36 @@
 import { LineChart } from '@mui/x-charts/LineChart';
+import { useAPI } from '../../utilities/DataContext';
+import { DataObject } from '../../types';
 import "./StressLevel.css";
+import { useEffect, useState } from 'react';
 
 const StressLevelPage= ()=> {
 
+  const data: DataObject[]= useAPI();
+
+  const [ displayData, setDisplayData ]= useState<any>( [] );
+  const [ yAxisData, setYAxisData ]= useState<any>( [] );
+
+  useEffect( ()=> {
+    if( data ) {
+      // 100 rows of sample data
+      const stressData= data.map( d=> d.Stress );
+      const timeData= data.map(( d, i )=> i );
+      setDisplayData( stressData );
+      setYAxisData( timeData );
+    }
+  }, [ data ]);
+
   return (
     <LineChart
-      xAxis={[{ data: [ 1, 2, 3, 4, 5, 6 ]}]}
+      xAxis={[{ data: yAxisData }]}
       series={[
         {
-          data: [ 1, 2, 3, 4, 5, 6 ],
+          data: displayData,
           showMark: false
         }
       ]}
-      height={300}
+      height={ 300 }
     />
   );
 };
