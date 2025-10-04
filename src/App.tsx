@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
 import { Route, Routes } from "react-router";
 import HomePage from "./Pages/Home/Home";
 import StressLevelPage from "./Pages/StressLevel/StressLevel";
@@ -6,39 +7,41 @@ import AnalyticsPage from "./Pages/Analytics/Analytics";
 import SettingsPage from "./Pages/Settings/Settings";
 import Menu from "./Components/Menu/Menu.component";
 import NotFoundPage from "./Pages/NotFound";
+import { CSVToArray } from "./utilities/CSVParser";
+import { DataObject } from "./types";
 import "./App.css";
-
-import { CSVToArray } from "./CSVParser";
-import { useEffect, useMemo, useState } from "react";
 
 const App = () => {
 
-  const [csvData, setCsvData] = useState<string>("");
+  const [ textData, setTextData ] = useState<string>( "" );
+  const [ data, setData ] = useState<DataObject[]>( [] );
 
-  useEffect(() => {
-    const fetchCSVData = async () => {
+  useEffect( ()=> {
+    const fetchCSVData= async ()=> {
       try {
-        const response = await fetch("../assets/out.csv");
-        const csvText = await response.text();
-        setCsvData(csvText);
-      } catch (error) {
-        console.error("Error fetching CSV data:", error);
+        const res= await fetch( "../assets/out.csv" );
+        const textData= await res.text();
+        setTextData( textData );
+      } catch( error ) {
+        console.error(" Error fetching CSV data:", error );
       }
     };
 
     fetchCSVData();
   }, []);
 
-  const parsedCsvData = useMemo(() => {
-    if (!csvData) return [];
-    return CSVToArray(csvData);
-  }, [csvData]);
+  const parsedData= useMemo<any>( ()=> {
+    if( !textData )
+      return [];
+    return CSVToArray( textData );
+  }, [ textData ]);
 
-  useEffect(() => {
-    if (parsedCsvData.length > 0) {
-      console.log(parsedCsvData);
+  useEffect( ()=> {
+    if( parsedData.length> 0 ) {
+      setData( parsedData );
+      console.log( data );
     }
-  }, [parsedCsvData]);
+  }, [ data, parsedData ]);
 
   return (
     <div className="container">
