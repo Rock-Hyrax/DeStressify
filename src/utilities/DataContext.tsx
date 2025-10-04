@@ -11,10 +11,9 @@ export function DataContextProvider({ children }: any) {
   useEffect( ()=> {
     async function fetchData() {
       try {
-        const res= await fetch( "../assets/out.csv" );
-        const textData= await res.text();
-        const parsedData: DataObject[]= CSVToArray( textData );
-        setData( parsedData );
+        const res= await fetch( "../assets/data.json" );
+        const textData= await res.json();
+        setData( textData );
       } catch( e ) {
         console.error(" Error fetching CSV data:", e );
       }
