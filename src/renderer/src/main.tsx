@@ -1,20 +1,20 @@
-import { createRoot } from 'react-dom/client'
-import { StrictMode } from 'react'
-import { BrowserRouter } from 'react-router'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-import App from './App'
-import './index.css'
+import { createRoot } from "react-dom/client";
+import { StrictMode } from "react";
+import { BrowserRouter } from "react-router";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import App from "./App";
+import "./index.css";
 
 const theme = createTheme({
-  palette: { mode: 'dark' }
-})
+  palette: { mode: "dark" }
+});
 
-const root = createRoot(document.getElementById('root') as HTMLElement)
+const root= createRoot( document.getElementById("root") as HTMLElement );
 
-window.api.getRange(Date.now() - 3600 * 1000, Date.now())
-window.api.onReport((value) => {
-  console.log(value)
-})
+window.api.getRange( Date.now()- 3600* 1000, Date.now() );
+window.api.onReport( value=> {
+  console.log( value );
+});
 
 root.render(
   <StrictMode>
@@ -24,4 +24,4 @@ root.render(
       </BrowserRouter>
     </ThemeProvider>
   </StrictMode>
-)
+);
