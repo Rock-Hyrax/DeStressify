@@ -1,4 +1,4 @@
-import { LineChart } from '@mui/x-charts/LineChart';
+import { LineChart } from '@mui/x-charts';
 import { useAPI } from '../../utilities/DataContext';
 import { DataObject } from '../../utilities/types';
 import { useEffect, useState } from 'react';
@@ -12,7 +12,7 @@ const StressLevelPage= ()=> {
   const [ yAxisData, setYAxisData ]= useState<any>( [] );
 
   useEffect( ()=> {
-    if( data ) {
+    if( data.length ) {
       const stressData= data.map( d=> d.Stress );
       const timeData= data.map(( d, i )=> i );
       setDisplayData( stressData );
