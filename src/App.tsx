@@ -8,7 +8,38 @@ import Menu from "./Components/Menu/Menu.component";
 import NotFoundPage from "./Pages/NotFound";
 import "./App.css";
 
-const App= ()=> {
+import { CSVToArray } from "./CSVParser";
+
+const App = () => {
+
+  const [csvData, setCsvData] = useState<string>("");
+
+  useEffect(() => {
+    const fetchCSVData = async () => {
+      try {
+        const response = await fetch("../assets/out.csv");
+        const csvText = await response.text();
+        setCsvData(csvText);
+      } catch (error) {
+        console.error("Error fetching CSV data:", error);
+      }
+    };
+
+    fetchCSVData();
+  }, []);
+
+  const parsedCsvData = useMemo(() => {
+    if (!csvData) return [];
+    return CSVToArray(csvData);
+  }, [csvData]);
+
+  useEffect(() => {
+    if (parsedCsvData.length > 0) {
+      console.log(parsedCsvData);
+    }
+  }, [parsedCsvData]);
+
+  
   return (
     <div className="container">
       <Menu />
@@ -24,6 +55,6 @@ const App= ()=> {
       </main>
     </div>
   );
-}
+};
 
 export default App;
