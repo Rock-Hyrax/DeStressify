@@ -1,8 +1,8 @@
 import { LineChart } from "@mui/x-charts";
 import { useAPI } from "../../utilities/DataContext";
 import { DataObject } from "../../utilities/types";
-import "./Widget.css";
 import { useEffect, useState } from "react";
+import "./Widget.css";
 
 const StressLevelTodayWidget= ()=> {
 
