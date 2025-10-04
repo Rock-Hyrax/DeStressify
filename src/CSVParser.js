@@ -38,21 +38,21 @@ export function CSVToArray(strData, strDelimiter) {
   }
 
   if (arrData.length < 2) return [];
-  
+
   const headers = arrData[0];
   const rows = arrData.slice(1);
-  
+
   return rows
-    .filter(row => row.length === headers.length) // Filter out incomplete rows
-    .map(row => {
+    .filter((row) => row.length === headers.length) // Filter out incomplete rows
+    .map((row) => {
       const obj = {};
       headers.forEach((header, index) => {
         const value = row[index];
         // Convert numeric values
-        if (value && !isNaN(value) && value !== '') {
+        if (value && !isNaN(value) && value !== "") {
           obj[header] = parseFloat(value);
         } else {
-          obj[header] = value || '';
+          obj[header] = value || "";
         }
       });
       return obj;
