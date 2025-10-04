@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { CSVToArray } from "./CSVParser";
-import { DataObject } from "../types";
+import { DataObject } from "./types";
 
 const DataContext= createContext<DataObject[]>( [] );
 
