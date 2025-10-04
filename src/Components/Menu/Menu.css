@@ -21,17 +21,49 @@
     list-style: none;
 
     a {
+      position: relative;
+      z-index: 3;
       display: flex;
       align-items: center;
       gap: 1rem;
       margin: .2rem 0;
       padding: .8rem 1.2rem;
       color: var( --font-color );
-      text-decoration: none
+      text-decoration: none;
+      transition: .2s
     }
 
     a:hover {
-      background: #111
+      background: var( --menu-link-hover-color )
+    }
+
+    a:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 20px;
+      height: 100%;
+      background: var( --menu-bg-color );
+      transition: .2s
+    }
+
+    a:hover:after {
+      display: block;
+      right: -20px;
+      background: var( --menu-link-hover-color );
+    }
+
+    a.active {
+      background: var( --color-accent-green );
+
+      &:after {
+        background: var( --color-accent-green );
+      }
+
+      &:hover:after {
+        right: 0
+      }
     }
 
     a:last-child {
