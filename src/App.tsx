@@ -1,11 +1,12 @@
 import { Route, Routes } from "react-router";
-import HomePage from "./pages/Home/Home";
-import StressLevelPage from "./pages/StressLevel/StressLevel";
-import ApplicationsPage from "./pages/Applications/Applications";
-import AnalyticsPage from "./pages/Analytics/Analytics";
-import Menu from "./components/Menu.component";
+import HomePage from "./Pages/Home/Home";
+import StressLevelPage from "./Pages/StressLevel/StressLevel";
+import ApplicationsPage from "./Pages/Applications/Applications";
+import AnalyticsPage from "./Pages/Analytics/Analytics";
+import SettingsPage from "./Pages/Settings/Settings";
+import Menu from "./Components/Menu/Menu.component";
+import NotFoundPage from "./Pages/NotFound";
 import "./App.css";
-import NotFoundPage from "./pages/NotFound";
 
 const App= ()=> {
   return (
@@ -17,6 +18,7 @@ const App= ()=> {
           <Route path="/stress-level" element={ <StressLevelPage /> } />
           <Route path="/applications" element={ <ApplicationsPage /> } />
           <Route path="/analytics" element={ <AnalyticsPage /> } />
+          <Route path="/settings" element={ <SettingsPage /> } />
           <Route path="*" element={ <NotFoundPage /> } />
         </Routes>
       </main>

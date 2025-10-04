@@ -1,5 +1,5 @@
 import "../Widget.css";
-import "./WorkTimeWidget.css";
+import "./WorkTime.css";
 
 enum TimeUnitTypeEnum {
   DAY= "day",
@@ -32,7 +32,9 @@ const TimeUnit= ({ value }: Props )=> {
 
 const WorkTimeWidget= ()=> {
 
-  const timeUnits= timeUnitData.map( unit=> < TimeUnit value={ unit } />);
+  const timeUnits= timeUnitData.map( unit=>
+    <TimeUnit key={ unit.type } value={ unit } />
+  );
 
   return (
     <div className="widget_container worktime_container">

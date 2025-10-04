@@ -18,8 +18,8 @@ const StressLevelWidget= ()=> {
 
   const indicators= stressLevelColors.map(( s, i )=> {
     if( i< level )
-      return <Indicator color={ s } on={ true } />
-    return <Indicator color={ s } on={ false } />
+      return <Indicator key={ i } color={ s } on={ true } />
+    return <Indicator key={ i } color={ s } on={ false } />
   }).reverse();
 
   return (
