@@ -1,14 +1,18 @@
-import { BarChart } from "@mui/x-charts/BarChart";
+import { NavLink, Route, Routes } from "react-router";
 import "./App.css";
+import HomePage from "./pages/Home.page";
+import StressLevelPage from "./pages/StressLevel.page";
 
 const App= ()=> {
   return (
     <div>
-      <BarChart
-        xAxis={[{ data: ['group A', 'group B', 'group C'] }]}
-        series={[{ data: [4, 3, 5] }, { data: [1, 6, 3] }, { data: [2, 5, 6] }]}
-        height={300}
-      />
+      <NavLink to="/stress-level" end>
+        <p>go to stress-level page</p>
+      </NavLink>
+      <Routes>
+        <Route path="/" element={ <HomePage /> } />
+        <Route path="/stress-level" element={ <StressLevelPage /> } />
+      </Routes>
     </div>
   );
 }
