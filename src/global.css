@@ -1,0 +1,11 @@
+@font-face {
+ font-family: "Jura";
+ src: local("Jura"), url("../public/assets/fonts/Jura.ttf") format("truetype");
+}
+
+:root {
+  --font-family: Jura;
+  --font-color: #eeeeee;
+  --bg-color: #263238;
+  --menu-bg-color: #212121
+}
