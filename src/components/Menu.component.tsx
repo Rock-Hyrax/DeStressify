@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import GridViewIcon from '@mui/icons-material/GridView';
 import BarChartIcon from '@mui/icons-material/BarChart';
@@ -17,6 +18,7 @@ const Menu= ()=> {
       </NavLink>
       <nav>
         <ul>
+          <NavLink to="/"><DashboardIcon />Dashboard</NavLink>
           <NavLink to="/stress-level"><ShowChartIcon />Stress level</NavLink>
           <NavLink to="/applications"><GridViewIcon />Applications</NavLink>
           <NavLink to="/analytics"><BarChartIcon />Analytics</NavLink>
