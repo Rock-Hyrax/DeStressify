@@ -1,12 +1,12 @@
 import { Route, Routes } from "react-router";
+import HomePage from "./Pages/Home/Home";
+import StressLevelPage from "./Pages/StressLevel/StressLevel";
+import ApplicationsPage from "./Pages/Applications/Applications";
+import AnalyticsPage from "./Pages/Analytics/Analytics";
+import SettingsPage from "./Pages/Settings/Settings";
+import Menu from "./Components/Menu/Menu.component";
+import NotFoundPage from "./Pages/NotFound";
 import "./App.css";
-import Menu from "./components/Menu.component";
-import AnalyticsPage from "./pages/Analytics/Analytics";
-import ApplicationsPage from "./pages/Applications/Applications";
-import HomePage from "./pages/Home/Home";
-import NotFoundPage from "./pages/NotFound";
-import StressLevelPage from "./pages/StressLevel/StressLevel";
-import { useEffect, useState, useMemo } from "react";
 
 import { CSVToArray } from "./CSVParser";
 
@@ -39,16 +39,18 @@ const App = () => {
     }
   }, [parsedCsvData]);
 
+  
   return (
     <div className="container">
       <Menu />
       <main className="content">
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/stress-level" element={<StressLevelPage />} />
-          <Route path="/applications" element={<ApplicationsPage />} />
-          <Route path="/analytics" element={<AnalyticsPage />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/" element={ <HomePage /> } />
+          <Route path="/stress-level" element={ <StressLevelPage /> } />
+          <Route path="/applications" element={ <ApplicationsPage /> } />
+          <Route path="/analytics" element={ <AnalyticsPage /> } />
+          <Route path="/settings" element={ <SettingsPage /> } />
+          <Route path="*" element={ <NotFoundPage /> } />
         </Routes>
       </main>
     </div>

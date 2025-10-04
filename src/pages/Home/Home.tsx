@@ -1,5 +1,5 @@
-import StressLevelWidget from "../../components/widgets/StressLevelWidget";
-import WorkTimeWidget from "../../components/widgets/WorkTimeWidget/WorkTimeWidget";
+import StressLevelWidget from "../../Components/Widgets/StressLevel.component";
+import WorkTimeWidget from "../../Components/Widgets/WorkTime/WorkTime.component";
 import "./Home.css";
 
 const HomePage= ()=> {
