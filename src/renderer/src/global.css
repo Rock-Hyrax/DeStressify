@@ -1,0 +1,17 @@
+@font-face {
+ font-family: "Jura";
+ src: local("Jura"), url("../public/assets/fonts/Jura.ttf") format("truetype");
+}
+
+:root {
+  --font-family: Jura;
+  --font-color: #EEEEEE;
+  --bg-color: #263238;
+  --menu-bg-color: #212121;
+  --menu-link-hover-color: #111111;
+
+  --color-accent-green: #8BC34A;
+  --color-accent-blue: #00BCD4;
+
+  --widget-border-color-blue: rgba(	0, 188, 212, .2 );
+}
