@@ -25,7 +25,7 @@ const TimeUnit= ({ value }: Props )=> {
   return (
     <div className="worktime_unit_container">
       <p className="value">{ String( value.value ).padStart( 2, "0" )}</p>
-      <p className="type">{ value.type }{ value.value=== 1? "s": "" }</p>
+      <p className="type">{ value.type }{ value.value=== 1? "": "s" }</p>
     </div>
   );
 };
