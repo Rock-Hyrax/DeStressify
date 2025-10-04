@@ -9,6 +9,7 @@ import NotFoundPage from "./Pages/NotFound";
 import "./App.css";
 
 import { CSVToArray } from "./CSVParser";
+import {useEffect, useMemo, useState} from "react";
 
 const App = () => {
 
