@@ -3,6 +3,7 @@ import WorkTimeWidget from "../../Components/Widgets/WorkTime/WorkTime.component
 import "./Home.css";
 
 const HomePage= ()=> {
+
   return (
     <div className="home_container">
       <StressLevelWidget />
