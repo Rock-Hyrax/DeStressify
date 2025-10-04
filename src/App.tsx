@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router";
-import HomePage from "./pages/Home/Home";
-import StressLevelPage from "./pages/StressLevel/StressLevel";
-import ApplicationsPage from "./pages/Applications/Applications";
-import AnalyticsPage from "./pages/Analytics/Analytics";
-import Menu from "./components/Menu.component";
+import HomePage from "./Pages/Home/Home";
+import StressLevelPage from "./Pages/StressLevel/StressLevel";
+import ApplicationsPage from "./Pages/Applications/Applications";
+import AnalyticsPage from "./Pages/Analytics/Analytics";
+import Menu from "./Components/Menu/Menu.component";
 import "./App.css";
-import NotFoundPage from "./pages/NotFound";
+import NotFoundPage from "./Pages/NotFound";
 
 const App= ()=> {
   return (

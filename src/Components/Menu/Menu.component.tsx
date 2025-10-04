@@ -3,7 +3,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import GridViewIcon from '@mui/icons-material/GridView';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import logo from "../assets/logo/logo.png";
+import logo from "../../assets/logo/logo.png";
 
 import "./Menu.css";
 

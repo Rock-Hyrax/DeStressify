@@ -1,5 +1,5 @@
 import "../Widget.css";
-import "./WorkTimeWidget.css";
+import "./WorkTime.css";
 
 enum TimeUnitTypeEnum {
   DAY= "day",
