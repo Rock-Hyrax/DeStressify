@@ -14,3 +14,7 @@ body {
   color: var( --font-color );
   font-family: var( --font-family )
 }
+
+p {
+  margin: 0
+}
