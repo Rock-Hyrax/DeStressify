@@ -1,34 +1,49 @@
-# client
+<img src="docs/logo.png" width="300">
 
-An Electron application with React and TypeScript
+# DeStressify
 
-## Recommended IDE Setup
+Desktop application for monitoring stress during work hours, providing insights into personal stress patterns, offering
+aggregated dashboard of team-wide wellbeing trends as a crucial initiative for workplace efficiency.
 
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+## Authors
 
-## Project Setup
+- [@n2one](https://github.com/n2oneProgrammer)
+- [@mwawrzen](https://github.com/mwawrzen)
+- [@anuszek](https://github.com/anuszek)
+- [@jaanonim](https://github.com/jaanonim)
 
-### Install
 
-```bash
-$ npm install
-```
+## Run Locally
 
-### Development
-
-```bash
-$ npm run dev
-```
-
-### Build
+Clone the project
 
 ```bash
-# For windows
-$ npm run build:win
-
-# For macOS
-$ npm run build:mac
-
-# For Linux
-$ npm run build:linux
+  git clone https://github.com/Rock-Hyrax/client
 ```
+
+Go to the project directory
+
+```bash
+  cd client
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run start
+```
+
+## Screenshots
+
+![Main Page](docs/main.png)
+![Applications Page](docs/applications.png)
+![Analytics Page](docs/analytics.png)
+![Breathing](docs/breathing.png)
+
+
