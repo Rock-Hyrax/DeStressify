@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
 import { DataObject } from "../../utilities/types";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 import "./Applications.css";
 
 const ApplicationsPage = () => {
@@ -41,19 +48,49 @@ const ApplicationsPage = () => {
     }
   }, [data]);
 
+  // return (
+  //   <div>
+  //     {apps.map((app, index) => (
+  //       <div key={index} className="app-item">
+  //         {app.name}:{" "}
+  //         {app.totalTime / 1000 > 3600
+  //           ? `${(app.totalTime / 1000 / 3600).toFixed(1)} hr`
+  //           : app.totalTime / 1000 > 60
+  //             ? `${(app.totalTime / 1000 / 60).toFixed(1)} min`
+  //             : `${(app.totalTime / 1000).toFixed(0)} sec`}
+  //       </div>
+  //     ))}
+  //   </div>
+  // );
+
   return (
-    <div>
-      {apps.map((app, index) => (
-        <div key={index} className="app-item">
-          {app.name}:{" "}
-          {app.totalTime / 1000 > 3600
-            ? `${(app.totalTime / 1000 / 3600).toFixed(1)} hr`
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Name</TableCell>
+            <TableCell align="left">Time</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {apps.map( app => (
+            <TableRow
+              key={app.name}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {app.name}
+              </TableCell>
+              <TableCell align="left">{app.totalTime / 1000 > 3600
+            ? `${(app.totalTime / 1000 / 3600).toFixed(1)} hours`
             : app.totalTime / 1000 > 60
-              ? `${(app.totalTime / 1000 / 60).toFixed(1)} min`
-              : `${(app.totalTime / 1000).toFixed(0)} sec`}
-        </div>
-      ))}
-    </div>
+              ? `${(app.totalTime / 1000 / 60).toFixed(1)} minutes`
+              : `${(app.totalTime / 1000).toFixed(0)} seconds`}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 
