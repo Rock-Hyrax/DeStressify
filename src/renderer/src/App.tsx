@@ -6,13 +6,13 @@ import AnalyticsPage from "./Pages/Analytics/Analytics";
 import SettingsPage from "./Pages/Settings/Settings";
 import Menu from "./Components/Menu/Menu.component";
 import NotFoundPage from "./Pages/NotFound";
-import { DataContextProvider } from "./utilities/DataContext";
+// import { DataContextProvider } from "./utilities/DataContext";
 import "./App.css";
 
 const App = () => {
 
   return (
-    <DataContextProvider>
+    // <DataContextProvider>
       <div className="container">
         <Menu />
         <main className="content">
@@ -26,7 +26,7 @@ const App = () => {
             </Routes>
         </main>
       </div>
-    </DataContextProvider>
+    // </DataContextProvider>
   );
 };
 

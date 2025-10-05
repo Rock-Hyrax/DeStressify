@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    api: any
+  }
+}
+
 type AppTimePerAppObject= any;
 
 export type DataObject= {
@@ -19,5 +25,5 @@ export type DataObject= {
   SnAppChange: number,
   AppTimePerApp: AppTimePerAppObject,
   Stress: number,
-  timestamp: string
+  Timestamp: string
 };

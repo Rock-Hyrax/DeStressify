@@ -1,23 +1,34 @@
 import { LineChart } from "@mui/x-charts";
 import { useEffect, useState } from "react";
-import { useAPI } from "../../utilities/DataContext";
 import { DataObject } from "../../utilities/types";
 import "./Widget.css";
 
 const StressLevelTodayWidget = () => {
-  const data: DataObject[] = useAPI();
 
-  const [xAxisData, setXAxisData] = useState<number[]>([]);
-  const [yAxisData, setYAxisData] = useState<number[]>([]);
+  const [ data, setData ]= useState<DataObject[]>( [] );
 
-  useEffect(() => {
-    if (data.length) {
-      const mappedXData = data.map((d) => d.Stress);
-      const mappedYData = data.map((_, i) => i);
-      setXAxisData(mappedXData);
-      setYAxisData(mappedYData);
+  const [ xAxisData, setXAxisData ]= useState<number[]>( [] );
+  const [ yAxisData, setYAxisData ]= useState<number[]>( [] );
+
+  useEffect( ()=> {
+    window.api.getRange( Date.now()- 3600* 1000, Date.now() );
+    const interval= setInterval( ()=> {
+      window.api.getRange( Date.now()- 3600* 1000, Date.now() );
+    }, 1000 );
+    window.api.onReport( value=> {
+      setData( value );
+    });
+    return ()=> clearInterval( interval );
+  }, [] );
+
+  useEffect( ()=> {
+    if( data.length ) {
+      const mappedXData= data.map( d=> d.Stress );
+      const mappedYData= data.map(( _, i)=> i );
+      setXAxisData( mappedXData );
+      setYAxisData( mappedYData );
     }
-  }, [data]);
+  }, [ data ]);
 
   return (
     <div className="widget_container">
@@ -25,7 +36,7 @@ const StressLevelTodayWidget = () => {
       <div className="widget_content">
         <LineChart
           xAxis={[{ data: yAxisData, position: "none" }]}
-          yAxis={[{ position: "none" }]}
+          yAxis={[{ min: 0, tickMinStep: 0, tickMaxStep: 10 }]}
           series={[
             {
               data: xAxisData,
@@ -33,7 +44,7 @@ const StressLevelTodayWidget = () => {
               showMark: false,
             },
           ]}
-          width={300}
+          width={ 600 }
           axisHighlight={{ x: "none", y: "none" }}
         />
       </div>

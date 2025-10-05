@@ -1,15 +1,25 @@
 import { LineChart } from '@mui/x-charts/LineChart';
-import { useAPI } from '../../utilities/DataContext';
 import { DataObject } from '../../utilities/types';
 import { useEffect, useState } from 'react';
 import "./StressLevel.css";
 
 const StressLevelPage= ()=> {
 
-  const data: DataObject[]= useAPI();
-
+  const [ data, setData ]= useState<DataObject[]>( [] );
   const [ displayData, setDisplayData ]= useState<any>( [] );
   const [ yAxisData, setYAxisData ]= useState<any>( [] );
+
+  useEffect( ()=> {
+    window.api.getRange( Date.now()- 3600* 1000, Date.now() );
+    const interval= setInterval( ()=> {
+      window.api.getRange( Date.now()- 3600* 1000, Date.now() );
+    }, 1000 );
+    window.api.onReport( value=> {
+      setData( value );
+    });
+
+    return ()=> clearInterval( interval );
+  }, [] );
 
   useEffect( ()=> {
     if( data.length ) {

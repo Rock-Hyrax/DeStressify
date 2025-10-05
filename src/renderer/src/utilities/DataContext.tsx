@@ -1,32 +1,39 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { DataObject } from "./types";
-import jsonData from "../../../../resources/data.json";
+
+const refreshTime= 15;
 
 const DataContext= createContext<DataObject[]>( [] );
 
-export function DataContextProvider({ children }: any) {
+// export function DataContextProvider({ children }: any) {
 
-  const [ data, setData ]= useState<any>( [] );
+//   const [ data, setData ]= useState<any>( [] );
 
-  useEffect( ()=> {
-    window.api.getRange( Date.now()- 3600* 1000, Date.now() );
-    window.api.onReport( value=> {
-      console.log( value );
-      setData( value );
-    });
-  }, []);
+//   useEffect( ()=> {
 
-  return (
-    <DataContext.Provider value={ data }>
-      { children }
-    </DataContext.Provider>
-  );
-}
+//     window.api.getRange( Date.now()- 3600* 1000, Date.now() );
 
-export function useAPI() {
+//     setInterval( ()=> {
+//       window.api.getRange( Date.now()- 3600* 1000, Date.now() );
+//     }, 1000* refreshTime );
 
-  const context= useContext( DataContext );
-  if( context=== undefined )
-    throw new Error( "Context must be used within a Provider" );
-  return context;
-}
+//     window.api.onReport( value=> {
+//       console.log( value );
+//       setData( value );
+//     });
+//   }, []);
+
+//   return (
+//     <DataContext.Provider value={ data }>
+//       { children }
+//     </DataContext.Provider>
+//   );
+// }
+
+// export function useAPI() {
+
+//   const context= useContext( DataContext );
+//   if( context=== undefined )
+//     throw new Error( "Context must be used within a Provider" );
+//   return context;
+// }
