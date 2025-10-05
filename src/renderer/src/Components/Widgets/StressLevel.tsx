@@ -1,7 +1,6 @@
 import "./Widget.css";
 import { DataObject } from "@renderer/utilities/types";
 import { lastStressLevel } from "@renderer/utilities/DataService";
-import { getData } from "@renderer/utilities/DataContext";
 import { useEffect, useState } from "react";
 
 const stressLevelColors= [ "#35D53C", "#D5C035", "#D59035", "#D55035", "#D53535" ];
@@ -18,9 +17,8 @@ const Indicator= ({ color, on }: Props )=> {
 
 const StressLevelWidget= ()=> {
 
-  let level: number;
-
   const [ data, setData ]= useState<DataObject[]>( [] );
+  const [ level, setLevel ]= useState<number>( 0 );
 
   useEffect( ()=> {
     window.api.getRange( Date.now()- 3600* 1000, Date.now() );
@@ -34,10 +32,11 @@ const StressLevelWidget= ()=> {
   }, [] );
 
   useEffect( ()=> {
-    level= Math.floor( lastStressLevel( data )/ 2 );
+    setLevel( Math.floor( lastStressLevel( data )/ 2 ));
   }, [ data ]);
 
   const indicators= stressLevelColors.map(( s, i )=> {
+    console.log( level );
     if( i< level )
       return <Indicator key={ i } color={ s } on={ true } />
     return <Indicator key={ i } color={ s } on={ false } />
