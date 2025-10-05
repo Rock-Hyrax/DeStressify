@@ -3,6 +3,7 @@ import { electronApp, optimizer } from '@electron-toolkit/utils'
 import { createWindow, getWindow } from './window'
 import { init } from './collector'
 import { getRange } from './dataDb'
+import { startTimer } from './timer'
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -25,6 +26,7 @@ app.whenReady().then(() => {
     f()
   })
   init()
+  startTimer()
 
   createWindow()
 
