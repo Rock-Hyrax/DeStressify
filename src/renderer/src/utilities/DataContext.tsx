@@ -1,24 +1,19 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { DataObject } from "./types";
+import jsonData from "../../../../resources/data.json";
 
 const DataContext= createContext<DataObject[]>( [] );
 
 export function DataContextProvider({ children }: any) {
 
-  const [ data, setData ]= useState<DataObject[]>( [] );
+  const [ data, setData ]= useState<any>( [] );
 
   useEffect( ()=> {
-    async function fetchData() {
-      try {
-        const res= await fetch( "../../../../resources/data.json" );
-        const textData= await res.json();
-        console.log( textData );
-        setData( textData );
-      } catch( e ) {
-        console.error(" Error fetching data:", e );
-      }
-    }
-    fetchData();
+    window.api.getRange( Date.now()- 3600* 1000, Date.now() );
+    window.api.onReport( value=> {
+      console.log( value );
+      setData( value );
+    });
   }, []);
 
   return (
