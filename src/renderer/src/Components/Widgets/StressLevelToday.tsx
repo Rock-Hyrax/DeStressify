@@ -15,7 +15,6 @@ const StressLevelTodayWidget= ()=> {
     if( data.length ) {
       const mappedXData= data.map( d=> d.Stress );
       const mappedYData= data.map(( _, i )=> i );
-      console.log( data, data.length );
       setXAxisData( mappedXData );
       setYAxisData( mappedYData );
     }
