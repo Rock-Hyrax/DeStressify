@@ -1,8 +1,9 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
-import { electronApp, optimizer } from '@electron-toolkit/utils'
-import { createWindow, getWindow } from './window'
-import { init } from './collector'
-import { getRange } from './dataDb'
+import {app, BrowserWindow, ipcMain, Tray, Menu} from 'electron'
+import {electronApp, optimizer} from '@electron-toolkit/utils'
+import {createWindow, getWindow} from './window'
+import {init} from './collector'
+import {getRange} from './dataDb'
+import icon from "../../resources/icon.png?asset"
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -26,8 +27,32 @@ app.whenReady().then(() => {
   })
   init()
 
-  createWindow()
+  const mainWindow = createWindow()
 
+  const tray = new Tray(icon);
+
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Open', click: () => {
+        mainWindow.show();
+      }
+    },
+    {
+      label: 'Exit', click: () => {
+        app.quit();
+      }
+    },
+  ]);
+
+  tray.setToolTip('Moja aplikacja');
+  tray.setContextMenu(contextMenu);
+  tray.on('click', () => {
+    mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show();
+  });
+  mainWindow.on('close', (event) => {
+    event.preventDefault();
+    mainWindow.hide();
+  });
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.

@@ -1,18 +1,18 @@
-import { join } from "path"
-import { is } from "@electron-toolkit/utils"
+import {join} from "path"
+import {is} from "@electron-toolkit/utils"
 import icon from "../../resources/icon.png?asset"
-import { shell, BrowserWindow } from "electron"
+import {shell, BrowserWindow} from "electron"
 
 export let win: null | BrowserWindow = null
 
-export function createWindow(): void {
+export function createWindow(): BrowserWindow {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 1100,
     height: 750,
     show: false,
     autoHideMenuBar: true,
-    ...(process.platform === "linux" ? { icon } : {}),
+    ...(process.platform === "linux" ? {icon} : {}),
     webPreferences: {
       preload: join(__dirname, "../preload/index.js"),
       sandbox: false
@@ -25,7 +25,7 @@ export function createWindow(): void {
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
-    return { action: "deny" }
+    return {action: "deny"}
   })
 
   // HMR for renderer base on electron-vite cli.
@@ -36,6 +36,7 @@ export function createWindow(): void {
     mainWindow.loadFile(join(__dirname, "../renderer/index.html"))
   }
   win = mainWindow
+  return mainWindow
 }
 
 export function getWindow(): Promise<BrowserWindow> {
