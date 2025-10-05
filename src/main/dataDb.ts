@@ -36,12 +36,16 @@ export const getRange = async (start: number, end: number) => {
     const sum = window.reduce((acc, val) => {
       console.log(acc, val)
       Object.keys(val).forEach((key) => {
+        console.log(key, val[key], acc[key]);
         if (key === "Timestamp" || typeof val[key] !== "number") {
-          acc = val[key]
+          acc[key] = val[key]
+
+          return;
         }
         if (acc[key] !== undefined) {
           acc[key] += val[key];
         } else {
+          console.log(acc, key)
           acc[key] = val[key];
         }
       })
