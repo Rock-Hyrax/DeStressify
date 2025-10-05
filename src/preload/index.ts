@@ -4,6 +4,7 @@ import { electronAPI } from '@electron-toolkit/preload'
 // Custom APIs for renderer
 const api = {
   onReport: (callback) => ipcRenderer.on('report', (_event, value) => callback(value)),
+  onTimer: (callback) => ipcRenderer.on('timer', (_event, value) => callback(value)),
   getRange: (start, end) => ipcRenderer.send('getRange', start, end)
 }
 

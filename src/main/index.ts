@@ -1,8 +1,9 @@
 import {app, BrowserWindow, ipcMain, Tray, Menu} from 'electron'
-import {electronApp, optimizer} from '@electron-toolkit/utils'
-import {createWindow, getWindow} from './window'
-import {init} from './collector'
-import {getRange} from './dataDb'
+import { electronApp, optimizer } from '@electron-toolkit/utils'
+import { createWindow, getWindow } from './window'
+import { init } from './collector'
+import { getRange } from './dataDb'
+import { startTimer } from './timer'
 import icon from "../../resources/icon.png?asset"
 
 // This method will be called when Electron has finished
@@ -26,6 +27,7 @@ app.whenReady().then(() => {
     f()
   })
   init()
+  startTimer()
 
   const mainWindow = createWindow()
 
