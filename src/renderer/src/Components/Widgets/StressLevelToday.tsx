@@ -4,22 +4,20 @@ import { useAPI } from "../../utilities/DataContext";
 import { DataObject } from "../../utilities/types";
 import "./Widget.css";
 
-const StressLevelTodayWidget= ()=> {
+const StressLevelTodayWidget = () => {
+  const data: DataObject[] = useAPI();
 
-  const data: DataObject[]= useAPI();
+  const [xAxisData, setXAxisData] = useState<number[]>([]);
+  const [yAxisData, setYAxisData] = useState<number[]>([]);
 
-  const [ xAxisData, setXAxisData ]= useState<number[]>( [] );
-  const [ yAxisData, setYAxisData ]= useState<number[]>( [] );
-
-  useEffect( ()=> {
-    if( data.length ) {
-      const mappedXData= data.map( d=> d.Stress );
-      const mappedYData= data.map(( _, i )=> i );
-      console.log( data, data.length );
-      setXAxisData( mappedXData );
-      setYAxisData( mappedYData );
+  useEffect(() => {
+    if (data.length) {
+      const mappedXData = data.map((d) => d.Stress);
+      const mappedYData = data.map((_, i) => i);
+      setXAxisData(mappedXData);
+      setYAxisData(mappedYData);
     }
-  }, [ data ]);
+  }, [data]);
 
   return (
     <div className="widget_container">
@@ -32,10 +30,10 @@ const StressLevelTodayWidget= ()=> {
             {
               data: xAxisData,
               color: "#00BCD4",
-              showMark: false
-            }
+              showMark: false,
+            },
           ]}
-          width={ 300 }
+          width={300}
           axisHighlight={{ x: "none", y: "none" }}
         />
       </div>
