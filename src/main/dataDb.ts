@@ -4,9 +4,7 @@ import { JSONFilePreset } from 'lowdb/node'
 
 const userDataPath = app.getPath('userData')
 const filePath = path.join(userDataPath, 'db.json')
-
-console.log( filePath )
-
+console.log(filePath)
 const defaultData = { reports: [] } as any
 
 const getDb = async () => {
