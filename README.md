@@ -18,7 +18,7 @@ aggregated dashboard of team-wide wellbeing trends as a crucial initiative for w
 Clone the project
 
 ```bash
-  git clone https://github.com/Rock-Hyrax/client
+  git clone https://github.com/Rock-Hyrax/client.git
 ```
 
 Go to the project directory
@@ -36,7 +36,7 @@ Install dependencies
 Start the server
 
 ```bash
-  npm run start
+  npm run dev
 ```
 
 ## Screenshots
