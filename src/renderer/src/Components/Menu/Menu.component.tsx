@@ -1,12 +1,13 @@
-import { NavLink } from 'react-router'
-import DashboardIcon from '@mui/icons-material/Dashboard'
-import ShowChartIcon from '@mui/icons-material/ShowChart'
-import GridViewIcon from '@mui/icons-material/GridView'
-import BarChartIcon from '@mui/icons-material/BarChart'
-import SettingsIcon from '@mui/icons-material/Settings'
-import logo from '../../../../../resources/icon.png'
+import { NavLink } from "react-router";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import ShowChartIcon from "@mui/icons-material/ShowChart";
+import GridViewIcon from "@mui/icons-material/GridView";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import SettingsIcon from "@mui/icons-material/Settings";
+import AirIcon from "@mui/icons-material/Air";
+import logo from "../../../../../resources/icon.png";
 
-import './Menu.css'
+import "./Menu.css";
 
 const Menu = () => {
   return (
@@ -35,6 +36,10 @@ const Menu = () => {
             <BarChartIcon />
             Analytics
           </NavLink>
+          <NavLink to="/breathing">
+            <AirIcon />
+            Breathing
+          </NavLink>
           <NavLink to="/settings">
             <SettingsIcon />
             Settings
@@ -42,7 +47,7 @@ const Menu = () => {
         </ul>
       </nav>
     </div>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;

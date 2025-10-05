@@ -1,0 +1,28 @@
+.anim_in {
+  animation: inhale 4s ease-in-out forwards;
+}
+.anim_ex {
+  animation: exhale 4s ease-in-out forwards;
+}
+.anim_hold {
+  animation: none;
+  transform: scale(1.75);
+}
+
+@keyframes inhale {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.75);
+  }
+}
+
+@keyframes exhale {
+  0% {
+    transform: scale(1.75);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
