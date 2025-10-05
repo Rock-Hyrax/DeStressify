@@ -32,11 +32,11 @@ const StressLevelTodayWidget = () => {
 
   return (
     <div className="widget_container">
-      <p className="widget_title">Stress level today</p>
       <div className="widget_content">
+      <p className="widget_title">Stress level today</p>
         <LineChart
           xAxis={[{ data: yAxisData, position: "none" }]}
-          yAxis={[{ min: 0, tickMinStep: 0, tickMaxStep: 10 }]}
+          yAxis={[{ tickMinStep: 0, tickMaxStep: 10 }]}
           series={[
             {
               data: xAxisData,
@@ -44,7 +44,8 @@ const StressLevelTodayWidget = () => {
               showMark: false,
             },
           ]}
-          width={ 600 }
+          width={ 700 }
+          height={ 200 }
           axisHighlight={{ x: "none", y: "none" }}
         />
       </div>

@@ -7,10 +7,17 @@ import "./Home.css";
 const HomePage = () => {
   return (
     <div className="home_container">
-      <StressLevelWidget />
-      <StressLevelTodayWidget />
-      <WorkTimeWidget />
-      <TopAppsWidget />
+      <h1>Welcome</h1>
+      <div className="widget_main_container">
+        <div>
+          <StressLevelTodayWidget />
+        </div>
+        <div>
+          <StressLevelWidget />
+          <TopAppsWidget />
+          <WorkTimeWidget />
+        </div>
+      </div>
     </div>
   );
 };

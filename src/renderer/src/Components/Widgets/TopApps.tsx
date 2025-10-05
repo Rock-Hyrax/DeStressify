@@ -40,8 +40,8 @@ const TopAppsWidget= ()=> {
 
   return (
     <div className="widget_container">
-      <p className="widget_title">Most used apps today</p>
       <div className="widget_content">
+      <p className="widget_title">Most used apps today</p>
         {apps.map((ele) => (
           <div
             style={{ display: "flex", justifyContent: "space-between" }}

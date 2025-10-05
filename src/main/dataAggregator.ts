@@ -227,7 +227,7 @@ export class DataAggregator {
     };
 
     if (!this.firstLoop) {
-      console.log(data);
+      console.log("New report:", Date.now(), data.Stress);
       addReport(data);
     }
     checkData();

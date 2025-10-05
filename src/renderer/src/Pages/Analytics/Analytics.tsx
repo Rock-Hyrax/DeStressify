@@ -1,6 +1,7 @@
 import {LineChart} from "@mui/x-charts";
 import {useEffect, useState} from "react";
 import {DataObject} from "../../utilities/types";
+import Button from '@mui/material/Button';
 import "./Analytics.css";
 
 const AnalyticsPage = () => {
@@ -104,7 +105,8 @@ const AnalyticsPage = () => {
 
         <div className="time_period_selector">
           {measurePeriods.map((period) => (
-            <button
+            <Button
+              variant="outlined"
               key={period}
               className={`period_button ${selectedPeriod === period ? 'active' : ''}`}
               onClick={() => {
@@ -114,31 +116,27 @@ const AnalyticsPage = () => {
               }}
             >
               {period}
-            </button>
+            </Button>
           ))}
         </div>
       </div>
 
       <div className="analytics_summary">
         <div>
+          <p>{leftClicks.toFixed(0)}</p>
           <strong>Total Left Clicks</strong>
-          <br/>
-          {leftClicks.toFixed(0)}
         </div>
         <div>
+          <p>{rightClicks.toFixed(0)}</p>
           <strong>Total Right Clicks</strong>
-          <br/>
-          {rightClicks.toFixed(0)}
         </div>
         <div>
+          <p>{keyPresses.toFixed(0)}</p>
           <strong>Total Key Presses</strong>
-          <br/>
-          {keyPresses.toFixed(0)}
         </div>
         <div>
-          <strong>Total Mouse Distance [px]</strong>
-          <br/>
-          {mouseDistance.toFixed(2)}
+          <p>{mouseDistance.toFixed(2)} px</p>
+          <strong>Total Mouse Distance</strong>
         </div>
       </div>
 

@@ -56,8 +56,10 @@ const WorkTimeWidget = () => {
 
   return (
     <div className="widget_container worktime_container">
-      <p className="widget_title">Work time</p>
-      <div className="widget_content worktime_content">{timeUnits}</div>
+      <div className="widget_content">
+        <p className="widget_title worktime_title">Work time</p>
+        <div className="worktime_content">{timeUnits}</div>
+      </div>
     </div>
   )
 }
