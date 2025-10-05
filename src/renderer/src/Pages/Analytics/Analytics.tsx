@@ -50,12 +50,12 @@ const AnalyticsPage = () => {
     const interval = setInterval(() => {
       window.api.getRange(Date.now() - getTimePeriod(selectedPeriod), Date.now());
     }, 1000);
-    window.api.onReport(value => {
-      setData(value);
+    window.api.onReport( value=> {
+      setData( value );
     });
 
-    return () => clearInterval(interval);
-  }, [selectedPeriod]);
+    return ()=> clearInterval( interval );
+  }, [ selectedPeriod ]);
 
   useEffect(() => {
     const filteredData = data
