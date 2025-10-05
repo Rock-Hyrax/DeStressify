@@ -21,7 +21,6 @@ const AnalyticsPage = () => {
   const [keyPresses, setKeyPresses] = useState(0);
   const [mouseDistance, setMouseDistance] = useState(0);
 
-  // Function to filter data based on selected time period
   const getFilteredData = (data: DataObject[], period: string): DataObject[] => {
     if (!data.length) return [];
     
@@ -30,23 +29,21 @@ const AnalyticsPage = () => {
     
     switch (period) {
       case "Last minute":
-        timeLimit = 60 * 1000; // 1 minute in milliseconds
+        timeLimit = 60 * 1000; 
         break;
       case "Last hour":
-        timeLimit = 60 * 60 * 1000; // 1 hour
+        timeLimit = 60 * 60 * 1000;
         break;
       case "Last day":
-        timeLimit = 24 * 60 * 60 * 1000; // 1 day
+        timeLimit = 24 * 60 * 60 * 1000; 
         break;
       case "Last week":
-        timeLimit = 7 * 24 * 60 * 60 * 1000; // 1 week
+        timeLimit = 7 * 24 * 60 * 60 * 1000;
         break;
       default:
         return data;
     }
     
-    // For now, we'll simulate filtering by taking a portion of the data
-    // In a real implementation, you'd filter based on timestamps
     const dataPointsToShow = Math.max(1, Math.floor(data.length * getDataRatio(period)));
     return data.slice(-dataPointsToShow);
   };
@@ -54,13 +51,13 @@ const AnalyticsPage = () => {
   const getDataRatio = (period: string): number => {
     switch (period) {
       case "Last minute":
-        return 0.1; // Show 10% of data points
+        return 0.1;
       case "Last hour":
-        return 0.3; // Show 30% of data points
+        return 0.3;
       case "Last day":
-        return 0.7; // Show 70% of data points
+        return 0.7;
       case "Last week":
-        return 1.0; // Show all data points
+        return 1.0;
       default:
         return 1.0;
     }
