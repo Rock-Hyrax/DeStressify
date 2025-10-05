@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { DataObject } from "./types";
 
+const refreshTime= 15;
+
 const DataContext= createContext<DataObject[]>( [] );
 
 export function DataContextProvider({ children }: any) {
@@ -8,7 +10,13 @@ export function DataContextProvider({ children }: any) {
   const [ data, setData ]= useState<any>( [] );
 
   useEffect( ()=> {
+
     window.api.getRange( Date.now()- 3600* 1000, Date.now() );
+
+    setInterval( ()=> {
+      window.api.getRange( Date.now()- 3600* 1000, Date.now() );
+    }, 1000* refreshTime );
+
     window.api.onReport( value=> {
       console.log( value );
       setData( value );

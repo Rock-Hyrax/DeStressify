@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    api: any
+  }
+}
+
 type AppTimePerAppObject= any;
 
 export type DataObject= {

@@ -224,6 +224,6 @@ export class DataAggregator {
       console.log(data)
       addReport(data)
     }
-    ;(await getWindow()).webContents.send('report', await getReports())
+
   }
 }
