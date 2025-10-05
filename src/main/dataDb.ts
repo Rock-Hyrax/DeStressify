@@ -14,6 +14,7 @@ const getDb = async () => {
 
 export const addReport = async (report: any) => {
   const db = await getDb();
+  console.log( report );
   await db.update(({reports}) => reports.push(report));
 };
 

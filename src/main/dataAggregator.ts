@@ -228,6 +228,7 @@ export class DataAggregator {
 
     if (!this.firstLoop) {
       console.log(data);
+      console.log( Date.now() );
       addReport(data);
     }
     checkData();
