@@ -1,0 +1,19 @@
+.stress_level_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem
+}
+
+.stress_level_container {
+  width: 100%;
+}
+
+.stress_level_content {
+  height: 100%
+}
+
+.time_period_selector {
+  display: flex;
+  gap: .5rem
+}
