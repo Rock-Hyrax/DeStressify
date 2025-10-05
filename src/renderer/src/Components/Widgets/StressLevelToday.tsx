@@ -1,8 +1,8 @@
 import { LineChart } from "@mui/x-charts";
 import { useAPI } from "../../utilities/DataContext";
 import { DataObject } from "../../utilities/types";
-import "./Widget.css";
 import { useEffect, useState } from "react";
+import "./Widget.css";
 
 const StressLevelTodayWidget= ()=> {
 
@@ -14,7 +14,8 @@ const StressLevelTodayWidget= ()=> {
   useEffect( ()=> {
     if( data.length ) {
       const mappedXData= data.map( d=> d.Stress );
-      const mappedYData= data.map(( d, i )=> i );
+      const mappedYData= data.map(( _, i )=> i );
+      console.log( data, data.length );
       setXAxisData( mappedXData );
       setYAxisData( mappedYData );
     }
@@ -35,7 +36,6 @@ const StressLevelTodayWidget= ()=> {
             }
           ]}
           width={ 300 }
-          height={ 200 }
           axisHighlight={{ x: "none", y: "none" }}
         />
       </div>
