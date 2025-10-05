@@ -34,9 +34,7 @@ export const getRange = async (start: number, end: number) => {
     const start = Math.max(0, i - windowSize + 1);
     const window = data.slice(start, i + 1); // Pobierz wartości w oknie
     const sum = window.reduce((acc, val) => {
-      console.log(acc, val)
       Object.keys(val).forEach((key) => {
-        console.log(key, val[key], acc[key]);
         if (key === "Timestamp" || typeof val[key] !== "number") {
           acc[key] = val[key]
 
@@ -45,7 +43,6 @@ export const getRange = async (start: number, end: number) => {
         if (acc[key] !== undefined) {
           acc[key] += val[key];
         } else {
-          console.log(acc, key)
           acc[key] = val[key];
         }
       })
