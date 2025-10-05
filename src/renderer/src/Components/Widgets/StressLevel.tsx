@@ -36,7 +36,6 @@ const StressLevelWidget= ()=> {
   }, [ data ]);
 
   const indicators= stressLevelColors.map(( s, i )=> {
-    console.log( level );
     if( i< level )
       return <Indicator key={ i } color={ s } on={ true } />
     return <Indicator key={ i } color={ s } on={ false } />
