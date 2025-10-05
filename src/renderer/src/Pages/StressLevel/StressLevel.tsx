@@ -46,16 +46,16 @@ const StressLevelPage= ()=> {
     });
 
     return ()=> clearInterval( interval );
-  }, [ setSelectedPeriod] );
+  }, [ selectedPeriod ] );
 
   useEffect( ()=> {
     if( data.length ) {
       const stressData= data.map( d=> d.Stress );
       const timeData= data.map(( d, i )=> i ); //getTimestampWithoutSeconds( +d.Timestamp ));
       setDisplayData( stressData );
-      setYAxisData( timeData );;
+      setYAxisData( timeData );
     }
-  }, [ data ]);
+  }, [ data, selectedPeriod ]);
 
   return (
     <div className="stress_level_container">
