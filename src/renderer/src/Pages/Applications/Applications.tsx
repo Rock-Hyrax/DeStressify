@@ -1,4 +1,3 @@
-import { log } from "console";
 import { useEffect, useState } from "react";
 import { useAPI } from "../../utilities/DataContext";
 import { DataObject } from "../../utilities/types";
@@ -36,9 +35,11 @@ const ApplicationsPage = () => {
       {apps.map((app, index) => (
         <div key={index} className="app-item">
           {app.name}:{" "}
-          {app.totalTime / 1000 > 60
-            ? `${(app.totalTime / 1000 / 60).toFixed(1)} min`
-            : `${(app.totalTime / 1000).toFixed(0)} sec`}
+          {app.totalTime / 1000 > 3600
+            ? `${(app.totalTime / 1000 / 3600).toFixed(1)} hr`
+            : app.totalTime / 1000 > 60
+              ? `${(app.totalTime / 1000 / 60).toFixed(1)} min`
+              : `${(app.totalTime / 1000).toFixed(0)} sec`}
         </div>
       ))}
     </div>
