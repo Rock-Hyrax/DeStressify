@@ -1,7 +1,7 @@
 import "./Widget.css";
 import { DataObject } from "@renderer/utilities/types";
-import { useAPI } from "@renderer/utilities/DataContext";
 import { lastStressLevel } from "@renderer/utilities/DataService";
+import { getData } from "@renderer/utilities/DataContext";
 
 const stressLevelColors= [ "#35D53C", "#D5C035", "#D59035", "#D55035", "#D53535" ];
 
@@ -17,7 +17,8 @@ const Indicator= ({ color, on }: Props )=> {
 
 const StressLevelWidget= ()=> {
 
-  const data: DataObject[]= useAPI();
+  // const data: DataObject[]= getData( Date.now()- 3600* 1000, Date.now() );
+  const data: any= [ 1, 2, 3, 4, 5 ];
 
   const level= Math.floor( lastStressLevel( data )/ 2 );
 

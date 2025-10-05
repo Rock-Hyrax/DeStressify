@@ -5,35 +5,35 @@ const refreshTime= 15;
 
 const DataContext= createContext<DataObject[]>( [] );
 
-export function DataContextProvider({ children }: any) {
+// export function DataContextProvider({ children }: any) {
 
-  const [ data, setData ]= useState<any>( [] );
+//   const [ data, setData ]= useState<any>( [] );
 
-  useEffect( ()=> {
+//   useEffect( ()=> {
 
-    window.api.getRange( Date.now()- 3600* 1000, Date.now() );
+//     window.api.getRange( Date.now()- 3600* 1000, Date.now() );
 
-    setInterval( ()=> {
-      window.api.getRange( Date.now()- 3600* 1000, Date.now() );
-    }, 1000* refreshTime );
+//     setInterval( ()=> {
+//       window.api.getRange( Date.now()- 3600* 1000, Date.now() );
+//     }, 1000* refreshTime );
 
-    window.api.onReport( value=> {
-      console.log( value );
-      setData( value );
-    });
-  }, []);
+//     window.api.onReport( value=> {
+//       console.log( value );
+//       setData( value );
+//     });
+//   }, []);
 
-  return (
-    <DataContext.Provider value={ data }>
-      { children }
-    </DataContext.Provider>
-  );
-}
+//   return (
+//     <DataContext.Provider value={ data }>
+//       { children }
+//     </DataContext.Provider>
+//   );
+// }
 
-export function useAPI() {
+// export function useAPI() {
 
-  const context= useContext( DataContext );
-  if( context=== undefined )
-    throw new Error( "Context must be used within a Provider" );
-  return context;
-}
+//   const context= useContext( DataContext );
+//   if( context=== undefined )
+//     throw new Error( "Context must be used within a Provider" );
+//   return context;
+// }
