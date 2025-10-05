@@ -1,4 +1,4 @@
-import { DataObject } from "../types";
+import { DataObject } from "./types";
 
 export function CSVToArray(strData: string, strDelimiter: string= "," ): DataObject[] {
 
