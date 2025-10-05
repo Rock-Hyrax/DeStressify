@@ -49,8 +49,10 @@ const StressLevelWidget = () => {
 
   return (
     <div className="widget_container">
-      <p className="widget_title">Stress level</p>
-      <div className="widget_content">{indicators}</div>
+      <div className="widget_content">
+        <p className="widget_title">Stress level</p>
+        <div className="stress_level_content">{indicators}</div>
+      </div>
     </div>
   );
 };

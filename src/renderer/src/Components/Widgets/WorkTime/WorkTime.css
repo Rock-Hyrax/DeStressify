@@ -1,11 +1,10 @@
-.worktime_container {
-  align-items: start
+.worktime_content {
+  display: flex;
+  gap: 1rem
 }
 
-.worktime_content {
-  flex-direction: row;
-  gap: 1rem;
-  padding-top: .5rem
+.worktime_title {
+  margin: 0
 }
 
 .worktime_unit_container {
