@@ -19,5 +19,5 @@ export type DataObject= {
   SnAppChange: number,
   AppTimePerApp: AppTimePerAppObject,
   Stress: number,
-  timestamp: string
+  Timestamp: string
 };

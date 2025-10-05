@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { DataObject } from "./types";
-import jsonData from "../../../../resources/data.json";
 
 const DataContext= createContext<DataObject[]>( [] );
 
