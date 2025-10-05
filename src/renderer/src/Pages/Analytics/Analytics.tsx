@@ -1,13 +1,13 @@
-import { LineChart } from "@mui/x-charts";
-import { useEffect, useState } from "react";
-import { DataObject } from "../../utilities/types";
+import {LineChart} from "@mui/x-charts";
+import {useEffect, useState} from "react";
+import {DataObject} from "../../utilities/types";
 import "./Analytics.css";
 
 const AnalyticsPage = () => {
-  const measurePeriods = ["Last minute", "Last hour", "Last day", "Last week"];
+  const measurePeriods = ["Last hour", "Last day", "Last week", "Last month"];
   const [selectedPeriod, setSelectedPeriod] = useState("Last hour");
 
-  const [ data, setData ] = useState<DataObject[]>( [] );
+  const [data, setData] = useState<DataObject[]>([]);
 
   const [leftClicksData, setLeftClicksData] = useState<number[]>([]);
   const [rightClicksData, setRightClicksData] = useState<number[]>([]);
@@ -20,16 +20,10 @@ const AnalyticsPage = () => {
   const [keyPresses, setKeyPresses] = useState(0);
   const [mouseDistance, setMouseDistance] = useState(0);
 
-  const getFilteredData = (data: DataObject[], period: string): DataObject[] => {
-    if (!data.length) return [];
-
-    const now = Date.now();
+  const getTimePeriod = (period: string): number => {
     let timeLimit: number;
 
     switch (period) {
-      case "Last minute":
-        timeLimit = 60 * 1000;
-        break;
       case "Last hour":
         timeLimit = 60 * 60 * 1000;
         break;
@@ -39,43 +33,31 @@ const AnalyticsPage = () => {
       case "Last week":
         timeLimit = 7 * 24 * 60 * 60 * 1000;
         break;
+      case "Last month":
+        timeLimit = 30 * 24 * 60 * 60 * 1000;
+        break;
       default:
-        return data;
+        return 7 * 24 * 60 * 60 * 1000;
     }
 
-    const dataPointsToShow = Math.max(1, Math.floor(data.length * getDataRatio(period)));
-    return data.slice(-dataPointsToShow);
+    // const dataPointsToShow = Math.max(1, Math.floor(data.length));
+    return timeLimit
   };
-
-  const getDataRatio = (period: string): number => {
-    switch (period) {
-      case "Last minute":
-        return 0.1;
-      case "Last hour":
-        return 0.3;
-      case "Last day":
-        return 0.7;
-      case "Last week":
-        return 1.0;
-      default:
-        return 1.0;
-    }
-  };
-
-  useEffect( ()=> {
-    window.api.getRange( Date.now()- 3600* 1000, Date.now() );
-    const interval= setInterval( ()=> {
-      window.api.getRange( Date.now()- 3600* 1000, Date.now() );
-    }, 1000 );
-    window.api.onReport( value=> {
-      setData( value );
-    });
-
-    return ()=> clearInterval( interval );
-  }, []);
 
   useEffect(() => {
-    const filteredData = getFilteredData(data, selectedPeriod);
+    window.api.getRange(Date.now() - getTimePeriod(selectedPeriod), Date.now());
+    const interval = setInterval(() => {
+      window.api.getRange(Date.now() - getTimePeriod(selectedPeriod), Date.now());
+    }, 1000);
+    window.api.onReport(value => {
+      setData(value);
+    });
+
+    return () => clearInterval(interval);
+  }, [selectedPeriod]);
+
+  useEffect(() => {
+    const filteredData = data
 
     if (filteredData.length) {
       let totalLeftClicks = 0;
@@ -125,7 +107,11 @@ const AnalyticsPage = () => {
             <button
               key={period}
               className={`period_button ${selectedPeriod === period ? 'active' : ''}`}
-              onClick={() => setSelectedPeriod(period)}
+              onClick={() => {
+                setSelectedPeriod(period)
+
+                window.api.getRange(Date.now() - getTimePeriod(period), Date.now());
+              }}
             >
               {period}
             </button>
@@ -136,22 +122,22 @@ const AnalyticsPage = () => {
       <div className="analytics_summary">
         <div>
           <strong>Total Left Clicks</strong>
-          <br />
-          {leftClicks}
+          <br/>
+          {leftClicks.toFixed(0)}
         </div>
         <div>
           <strong>Total Right Clicks</strong>
-          <br />
-          {rightClicks}
+          <br/>
+          {rightClicks.toFixed(0)}
         </div>
         <div>
           <strong>Total Key Presses</strong>
-          <br />
-          {keyPresses}
+          <br/>
+          {keyPresses.toFixed(0)}
         </div>
         <div>
-          <strong>Total Mouse Distance</strong>
-          <br />
+          <strong>Total Mouse Distance [px]</strong>
+          <br/>
           {mouseDistance.toFixed(2)}
         </div>
       </div>
@@ -160,8 +146,8 @@ const AnalyticsPage = () => {
         <div className="chart_container">
           <h3>Left Clicks Over Time ({selectedPeriod})</h3>
           <LineChart
-            xAxis={[{ data: timeAxisData, position: "bottom" }]}
-            yAxis={[{ position: "left" }]}
+            xAxis={[{data: timeAxisData, position: "bottom"}]}
+            yAxis={[{position: "left"}]}
             series={[
               {
                 data: leftClicksData,
@@ -171,15 +157,15 @@ const AnalyticsPage = () => {
             ]}
             width={400}
             height={200}
-            axisHighlight={{ x: "none", y: "none" }}
+            axisHighlight={{x: "none", y: "none"}}
           />
         </div>
 
         <div className="chart_container">
           <h3>Right Clicks Over Time ({selectedPeriod})</h3>
           <LineChart
-            xAxis={[{ data: timeAxisData, position: "bottom" }]}
-            yAxis={[{ position: "left" }]}
+            xAxis={[{data: timeAxisData, position: "bottom"}]}
+            yAxis={[{position: "left"}]}
             series={[
               {
                 data: rightClicksData,
@@ -189,15 +175,15 @@ const AnalyticsPage = () => {
             ]}
             width={400}
             height={200}
-            axisHighlight={{ x: "none", y: "none" }}
+            axisHighlight={{x: "none", y: "none"}}
           />
         </div>
 
         <div className="chart_container">
           <h3>Key Strokes Over Time ({selectedPeriod})</h3>
           <LineChart
-            xAxis={[{ data: timeAxisData, position: "bottom" }]}
-            yAxis={[{ position: "left" }]}
+            xAxis={[{data: timeAxisData, position: "bottom"}]}
+            yAxis={[{position: "left"}]}
             series={[
               {
                 data: keyStrokesData,
@@ -207,15 +193,15 @@ const AnalyticsPage = () => {
             ]}
             width={400}
             height={200}
-            axisHighlight={{ x: "none", y: "none" }}
+            axisHighlight={{x: "none", y: "none"}}
           />
         </div>
 
         <div className="chart_container">
           <h3>Mouse Distance Over Time ({selectedPeriod})</h3>
           <LineChart
-            xAxis={[{ data: timeAxisData, position: "bottom" }]}
-            yAxis={[{ position: "left" }]}
+            xAxis={[{data: timeAxisData, position: "bottom"}]}
+            yAxis={[{position: "left"}]}
             series={[
               {
                 data: mouseDistanceData,
@@ -225,7 +211,7 @@ const AnalyticsPage = () => {
             ]}
             width={400}
             height={200}
-            axisHighlight={{ x: "none", y: "none" }}
+            axisHighlight={{x: "none", y: "none"}}
           />
         </div>
       </div>
