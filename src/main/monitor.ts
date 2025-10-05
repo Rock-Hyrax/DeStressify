@@ -6,7 +6,7 @@ export function checkData(): void {
     if (data.reduce((a, b) => a + b.Stress, 0) / data.length > 5) {
       new Notification({
         title: "DeStressify",
-        body: "You seem stressed, take a break!",
+        body: "You seem stressed, take a break or try a breathing exercise.",
       }).show();
     }
   });
