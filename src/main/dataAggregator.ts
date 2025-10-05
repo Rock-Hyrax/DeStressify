@@ -2,6 +2,7 @@ import { getWindow } from './window.js'
 import { addReport, getReports } from './dataDb.js'
 import ort from 'onnxruntime-node'
 import model from '../../resources/tree.onnx?asset'
+import { checkData } from './monitor.js'
 
 export class DataAggregator {
   firstLoop: boolean
@@ -224,6 +225,7 @@ export class DataAggregator {
       console.log(data)
       addReport(data)
     }
+    checkData()
     ;(await getWindow()).webContents.send('report', await getReports())
   }
 }
