@@ -16,7 +16,7 @@ class Db {
     this.data = null;
     this.read();
     if (this.data === null) {
-      db.write(defaultData);
+      this.write(defaultData);
     }
   }
 
@@ -41,16 +41,22 @@ class Db {
     });
   }
 }
-
-const db = new Db(filePath);
+let globalDb;
+const getDb = () => {
+  if (globalDb) return globalDb;
+  globalDb = new Db(filePath);
+  return globalDb;
+};
 
 export const addReport = async (report: any) => {
+  const db = getDb();
   const data = db.read();
   data.reports.push(report);
   db.write(data);
 };
 
 export const getReports = async () => {
+  const db = getDb();
   const data = db.read();
   return data.reports;
 };
