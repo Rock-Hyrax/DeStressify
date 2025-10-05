@@ -1,14 +1,26 @@
 import { useState, useEffect } from "react";
-import { useAPI } from "../../utilities/DataContext";
 import "./Widget.css";
 import { DataObject } from "@renderer/utilities/types";
 
-const TopAppsWidget = () => {
-  const data: DataObject[] = useAPI();
+const TopAppsWidget= ()=> {
 
-  const [apps, setApps] = useState([] as any);
-  useEffect(() => {
-    const dict = {};
+  const [ data, setData ] = useState<DataObject[]>( [] );
+  const [ apps, setApps ] = useState<any>( [] );
+
+  useEffect( ()=> {
+    window.api.getRange( Date.now()- 3600* 1000, Date.now() );
+    const interval= setInterval( ()=> {
+      window.api.getRange( Date.now()- 3600* 1000, Date.now() );
+    }, 1000 );
+    window.api.onReport( value=> {
+      setData( value );
+    });
+
+    return ()=> clearInterval( interval );
+  }, []);
+
+  useEffect( ()=> {
+    const dict= {};
     data.forEach((ele) => {
       Object.keys(ele.AppTimePerApp).forEach((app) => {
         if (dict[app]) {
@@ -18,11 +30,14 @@ const TopAppsWidget = () => {
         }
       });
     });
-    const newApps = Object.entries(dict)
+
+    const newApps= Object.entries(dict)
       .sort((a, b) => (b[1] as number) - (a[1] as number))
       .slice(0, 5);
+
     setApps(newApps);
-  }, [data]);
+  }, [ data ]);
+
   return (
     <div className="widget_container">
       <p className="widget_title">Most used apps today</p>

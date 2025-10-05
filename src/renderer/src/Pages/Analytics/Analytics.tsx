@@ -1,6 +1,5 @@
 import { LineChart } from "@mui/x-charts";
 import { useEffect, useState } from "react";
-import { useAPI } from "../../utilities/DataContext";
 import { DataObject } from "../../utilities/types";
 import "./Analytics.css";
 
@@ -8,7 +7,7 @@ const AnalyticsPage = () => {
   const measurePeriods = ["Last minute", "Last hour", "Last day", "Last week"];
   const [selectedPeriod, setSelectedPeriod] = useState("Last hour");
 
-  const data: DataObject[] = useAPI();
+  const [ data, setData ] = useState<DataObject[]>( [] );
 
   const [leftClicksData, setLeftClicksData] = useState<number[]>([]);
   const [rightClicksData, setRightClicksData] = useState<number[]>([]);
@@ -23,19 +22,19 @@ const AnalyticsPage = () => {
 
   const getFilteredData = (data: DataObject[], period: string): DataObject[] => {
     if (!data.length) return [];
-    
+
     const now = Date.now();
     let timeLimit: number;
-    
+
     switch (period) {
       case "Last minute":
-        timeLimit = 60 * 1000; 
+        timeLimit = 60 * 1000;
         break;
       case "Last hour":
         timeLimit = 60 * 60 * 1000;
         break;
       case "Last day":
-        timeLimit = 24 * 60 * 60 * 1000; 
+        timeLimit = 24 * 60 * 60 * 1000;
         break;
       case "Last week":
         timeLimit = 7 * 24 * 60 * 60 * 1000;
@@ -43,7 +42,7 @@ const AnalyticsPage = () => {
       default:
         return data;
     }
-    
+
     const dataPointsToShow = Math.max(1, Math.floor(data.length * getDataRatio(period)));
     return data.slice(-dataPointsToShow);
   };
@@ -63,9 +62,21 @@ const AnalyticsPage = () => {
     }
   };
 
+  useEffect( ()=> {
+    window.api.getRange( Date.now()- 3600* 1000, Date.now() );
+    const interval= setInterval( ()=> {
+      window.api.getRange( Date.now()- 3600* 1000, Date.now() );
+    }, 1000 );
+    window.api.onReport( value=> {
+      setData( value );
+    });
+
+    return ()=> clearInterval( interval );
+  }, []);
+
   useEffect(() => {
     const filteredData = getFilteredData(data, selectedPeriod);
-    
+
     if (filteredData.length) {
       let totalLeftClicks = 0;
       let totalRightClicks = 0;
@@ -108,7 +119,7 @@ const AnalyticsPage = () => {
     <div className="analytics_container">
       <div className="analytics_header">
         <h1>Analytics</h1>
-        
+
         <div className="time_period_selector">
           {measurePeriods.map((period) => (
             <button

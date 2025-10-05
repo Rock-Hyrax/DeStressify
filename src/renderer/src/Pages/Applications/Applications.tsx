@@ -1,12 +1,23 @@
 import { useEffect, useState } from "react";
-import { useAPI } from "../../utilities/DataContext";
 import { DataObject } from "../../utilities/types";
 import "./Applications.css";
 
 const ApplicationsPage = () => {
-  const data: DataObject[] = useAPI();
 
+  const [ data, setData ] = useState<DataObject[]>( [] );
   const [apps, setApps] = useState<{ name: string; totalTime: number }[]>([]);
+
+  useEffect( ()=> {
+    window.api.getRange( Date.now()- 3600* 1000, Date.now() );
+    const interval= setInterval( ()=> {
+      window.api.getRange( Date.now()- 3600* 1000, Date.now() );
+    }, 1000 );
+    window.api.onReport( value=> {
+      setData( value );
+    });
+
+    return ()=> clearInterval( interval );
+  }, []);
 
   useEffect(() => {
     if (data.length) {
