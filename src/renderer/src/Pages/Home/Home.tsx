@@ -7,6 +7,7 @@ import "./Home.css";
 const HomePage = () => {
   return (
     <div className="home_container">
+      <h1>welcome</h1>
       <StressLevelWidget />
       <StressLevelTodayWidget />
       <WorkTimeWidget />
