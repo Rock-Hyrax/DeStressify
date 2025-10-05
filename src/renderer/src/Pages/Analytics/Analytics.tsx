@@ -123,20 +123,20 @@ const AnalyticsPage = () => {
         <div>
           <strong>Total Left Clicks</strong>
           <br/>
-          {leftClicks}
+          {leftClicks.toFixed(0)}
         </div>
         <div>
           <strong>Total Right Clicks</strong>
           <br/>
-          {rightClicks}
+          {rightClicks.toFixed(0)}
         </div>
         <div>
           <strong>Total Key Presses</strong>
           <br/>
-          {keyPresses}
+          {keyPresses.toFixed(0)}
         </div>
         <div>
-          <strong>Total Mouse Distance</strong>
+          <strong>Total Mouse Distance [px]</strong>
           <br/>
           {mouseDistance.toFixed(2)}
         </div>
